@@ -3,7 +3,13 @@ resource "aws_security_group" "tf-sg" {
   description = "new"
   vpc_id      = aws_vpc.tf-vpc.id
 
-
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   ingress {
     description = "allows httpd"
     from_port   = 80
